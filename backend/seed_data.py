@@ -15,6 +15,7 @@ def seed_tasks() -> None:
         conn.execute("DELETE FROM tasks")
         conn.execute("DELETE FROM sqlite_sequence WHERE name = 'tasks'")
 
+        random.seed(42)
         rows = []
         for i in range(1, TASK_COUNT + 1):
             status = random.choice(STATUSES)
