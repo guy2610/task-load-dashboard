@@ -2,6 +2,8 @@ const API_URL = "http://127.0.0.1:8000/api/tasks";
 
 const totalTasksElement = document.getElementById("totalTasks");
 const backendTimeElement = document.getElementById("backendTime");
+const apiRoundTripTimeElement = document.getElementById("apiRoundTripTime");
+const renderTimeElement = document.getElementById("renderTime");
 const tableBodyElement = document.getElementById("tasksTableBody");
 const loadingMessageElement = document.getElementById("loadingMessage");
 const errorMessageElement = document.getElementById("errorMessage");
@@ -12,7 +14,13 @@ async function loadTasks() {
     errorMessageElement.classList.add("hidden");
     tableBodyElement.innerHTML = "";
 
+    totalTasksElement.textContent = "-";
+    backendTimeElement.textContent = "-";
+    apiRoundTripTimeElement.textContent = "-";
+    renderTimeElement.textContent = "-";
+
     try {
+        const requestStart = performance.now();
         const response = await fetch(API_URL);
 
         if (!response.ok) {
@@ -20,10 +28,16 @@ async function loadTasks() {
         }
 
         const data = await response.json();
+        const requestEnd = performance.now();
 
+        const renderStart = performance.now();
         renderTasks(data.tasks);
+        const renderEnd = performance.now();
+
         totalTasksElement.textContent = data.total;
         backendTimeElement.textContent = `${data.backendDurationMs} ms`;
+        apiRoundTripTimeElement.textContent = `${(requestEnd - requestStart).toFixed(2)} ms`;
+        renderTimeElement.textContent = `${(renderEnd - renderStart).toFixed(2)} ms`;
     } catch (error) {
         errorMessageElement.textContent = `שגיאה בטעינת המשימות: ${error.message}`;
         errorMessageElement.classList.remove("hidden");
