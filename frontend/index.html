@@ -37,6 +37,20 @@
             <button id="reloadButton">רענון</button>
         </div>
 
+        <div class="controls">
+            <label for="renderMode">מצב תצוגה</label>
+            <select id="renderMode">
+                <option value="full">Full Render - הצגת כל המשימות</option>
+                <option value="paginated">Paginated - הצגת 100 משימות בעמוד</option>
+            </select>
+
+            <div id="paginationControls" class="pagination-controls hidden">
+                <button id="previousPageButton">הקודם</button>
+                <span id="pageInfo">עמוד -</span>
+                <button id="nextPageButton">הבא</button>
+            </div>
+        </div>
+
         <div id="loadingMessage" class="message">טוען משימות...</div>
         <div id="errorMessage" class="message error hidden"></div>
 

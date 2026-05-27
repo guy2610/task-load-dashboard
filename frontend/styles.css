@@ -103,3 +103,28 @@ th {
 tbody tr:hover {
     background: #f3f4f6;
 }
+.controls {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.controls select {
+    padding: 8px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    background: white;
+}
+
+.pagination-controls {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.pagination-controls button:disabled {
+    cursor: not-allowed;
+    background: #9ca3af;
+}
